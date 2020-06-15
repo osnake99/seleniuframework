@@ -16,8 +16,8 @@ class LoginPage(BasePage):
 
     def login(self):
         self.open()
-        self.switch_frame(webElement=self.find_element(*self.IFRAME_TAG, timeout=5))
-        self.click_element(webElement=self.find_element(*self.LOGIN_TYPE, timeout=5))
-        self.send_keys(webElement=self.find_element(*self.USERNAME), keys="aaaaaa")
-        self.send_keys(webElement=self.find_element(*self.PASSWORD), keys="bbbbbb123")
-        self.click_element(webElement=self.find_element(*self.LOGIN_BUTTON))
+        self.switch_frame(webelement=self.find_element(*self.IFRAME_TAG, timeout=5))
+        self.click_element(webelement=self.find_element(*self.LOGIN_TYPE, timeout=5))
+        self.send_keys(webelement=self.find_element(*self.USERNAME), keys="aaaaaa")
+        self.send_keys(webelement=self.find_element(*self.PASSWORD), keys="bbbbbb123")
+        self.click_element(webelement=self.find_element(*self.LOGIN_BUTTON))

@@ -24,17 +24,34 @@ class BasePage(object):
             self._driver.quit()
             raise TimeoutException(msg="定位元素失败，方式为{}".format(locator))
 
-    def send_keys(self, webElement, keys):
-        print(webElement)
-        webElement.clear()
-        webElement.send_keys(keys)
+    def find_elements(self, *locator, index=0, timeout=None):
+        try:
+            elements = self._driver.find_elements(*self.locator)
+            # self._init_wait(timeout).until(EC.visibility_of_all_elements_located_located(locator=locator))
+            return elements[index]
+        except (NoSuchElementException, TimeoutException):
+            self._driver.quit()
+            raise TimeoutException(msg="定位元素失败，方式为{}".format(locator))
 
-    def click_element(self, webElement):
-        webElement.click()
+    # 在指定元素中输入文字
+    def send_keys(self, webelement, keys):
+        print(webelement)
+        webelement.clear()
+        webelement.send_keys(keys)
 
-    def switch_frame(self, webElement):
-        self._driver.switch_to.frame(webElement)
+    # 点击指定元素
+    def click_element(self, webelement):
+        webelement.click()
+
+    # 切换到指定的iframe框架
+    def switch_frame(self, webelement):
+        self._driver.switch_to.frame(webelement)
         print("已跳转iframe")
+
+    # 切换到最新的标签页
+    def switch_new_window(self):
+        windows = self._driver.window_handles
+        self._driver.switch_to.window(windows[-1])
 
     # 显示等待方法
     def _init_wait(self, timeout):
